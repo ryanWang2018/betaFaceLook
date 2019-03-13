@@ -8,7 +8,7 @@
   "main": "index.js",
   "scripts": {
     "start": "concurrently \"cd backend && nodemon server.js\" \"cd client && npm start\"",
-    "heroku-postbuild": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    "heroku-postbuild": "cd client/ && npm install && npm run build"
   },
   "repository": {
     "type": "git",
