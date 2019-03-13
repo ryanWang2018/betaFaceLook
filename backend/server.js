@@ -10,7 +10,6 @@ let API_PORT = process.env.PORT;
 if (API_PORT == null || API_PORT == "") {
   API_PORT = 3001;
 }
-
 // Multi-process to utilize all CPU cores.
 if (!isDev && cluster.isMaster) {
   console.error(`Node cluster master ${process.pid} is running`);
@@ -43,6 +42,7 @@ if (!isDev && cluster.isMaster) {
 
   const User = require("./models/users");
   const Rooms = require("./models/rooms");
+  app.use(express.static(path.resolve(__dirname, "../backend/build")));
 
   // this is our MongoDB database
   const dbRoute =

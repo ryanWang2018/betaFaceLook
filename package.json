@@ -7,7 +7,8 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"cd backend && nodemon server.js\" \"cd client && npm start\""
+    "start": "concurrently \"cd backend && nodemon server.js\" \"cd client && npm start\"",
+    "heroku-postbuild": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "repository": {
     "type": "git",
@@ -21,16 +22,17 @@
   },
   "homepage": "https://github.com/UTSCC09/project-facelook#readme",
   "dependencies": {
-    "express": "^4.16.4",
-    "bootstrap": "^4.3.1",
-    "concurrently": "^4.1.0",
-    "react-router-dom": "^4.3.1",
     "body-parser": "^1.18.3",
+    "bootstrap": "^4.3.1",
     "cluster": "^0.7.7",
+    "compression": "^1.7.3",
+    "concurrently": "^4.1.0",
     "cookie": "^0.3.1",
+    "express": "^4.16.4",
     "express-session": "^1.15.6",
     "express-validator": "^5.3.1",
     "mongoose": "^5.4.18",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "react-router-dom": "^4.3.1"
   }
 }
