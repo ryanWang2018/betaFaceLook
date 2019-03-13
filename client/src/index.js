@@ -8,14 +8,12 @@ import LoginPage from "./LoginPage.jsx";
 /* import BrowserRouter from 'react-router-dom' */
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
-import { CookiesProvider } from "react-cookie";
 
 ReactDOM.render(
-  <CookiesProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </CookiesProvider>,
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+
   document.getElementById("root")
 );
 serviceWorker.unregister();
