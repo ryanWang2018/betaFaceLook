@@ -1,0 +1,96 @@
+html {
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    /* background-color: black; */
+    background: black;
+}
+
+.play_ground_css {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    width: 700px;
+    height: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    /* border: 2px #3C3D3F solid; */
+    /* background-color: transparent */
+}
+
+#video {
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    object-fit: cover;
+    /* top: 0px; */
+    left: auto;
+    right: auto;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.my_score_and_opponent {
+    display: flex;
+    flex-flow: row;
+    height: 30%;
+    justify-content: space-between;
+}
+
+.my_score_css {
+    margin-top: 1%;
+    width: 200px;
+    height: 180px;
+    border-radius: 10px;
+    padding: 0 10px;
+    background-color: rgba(70, 60, 60, 0.3);
+}
+
+.show_opponent_css {
+    margin-top: 1%;
+    width: 200px;
+    height: 180px;
+    border-radius: 10px;
+    padding: 0 10px;
+    background-color: rgba(70, 60, 60, 0.3);
+}
+
+.running_img_css {
+    width: 100%;
+    height: 30%;
+    margin-top: 10%;
+}
+
+.display_img_css {
+    width: 100%;
+    height: 80%;
+    background-color: rgba(70, 60, 60, 0.3);
+}
+
+.moving_img_css {
+    position: relative;
+    object-fit: contain;
+    left: 101%;
+    height: 100%;
+    width: 40px;
+}
+
+.win_lose_css {
+    background-image: url(../media/winner.png);
+    background-color: rgb(41, 44, 40);
+    border-radius: 25px;
+    padding: 10px 30px;
+    width: 30%;
+    height: 30%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    margin: auto;
+}
+
+.my_score_text_css {
+    color: white;
+    font-size: 20px;
+}
