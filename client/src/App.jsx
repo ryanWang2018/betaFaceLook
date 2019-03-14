@@ -12,13 +12,13 @@ class App extends Component {
     this.state = {
       isLogin: false
     };
-    api.get("/user/", null).then(res => {
-      if (res.status === 200) {
-        this.setState({ isLogin: true });
-      } else {
-        this.setState({ isLogin: false });
-      }
-    });
+    // api.get("/user/", null).then(res => {
+    //   if (res.status === 200) {
+    //     this.setState({ isLogin: true });
+    //   } else {
+    //     this.setState({ isLogin: false });
+    //   }
+    // });
   }
   checkLoginPage = value => {
     this.setState({ isLogin: true });
