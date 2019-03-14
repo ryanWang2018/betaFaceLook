@@ -42,7 +42,7 @@ if (!isDev && cluster.isMaster) {
   const router = express.Router();
   console.log("before cors call");
 
-  //app.use(cors());
+  app.use(cors());
   console.log("after cors call");
 
   const User = require("./models/users");
@@ -71,19 +71,19 @@ if (!isDev && cluster.isMaster) {
 
   app.use(express.static("static"));
 
-  app.use(function(req, res, next) {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    res.setHeader(
-      "Access-Control-Allow-Methods",
-      "GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS"
-    );
-    res.setHeader("Access-Control-Allow-Credentials", true);
-    next();
-  });
+  // app.use(function(req, res, next) {
+  //   res.setHeader("Access-Control-Allow-Origin", "*");
+  //   res.setHeader(
+  //     "Access-Control-Allow-Headers",
+  //     "Origin, X-Requested-With, Content-Type, Accept"
+  //   );
+  //   res.setHeader(
+  //     "Access-Control-Allow-Methods",
+  //     "GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS"
+  //   );
+  //   res.setHeader("Access-Control-Allow-Credentials", true);
+  //   next();
+  // });
 
   // ------------------------
   app.use(function(req, res, next) {
