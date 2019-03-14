@@ -35,10 +35,6 @@ class App extends Component {
           <Route path="/gameRooms">
             <GameRooms isLogin={this.state.isLogin} />
           </Route>
-
-          <Route path="/?" component={RegisterForm}>
-            {console.log(this.props.location)}
-          </Route>
         </Switch>
       </div>
     );
