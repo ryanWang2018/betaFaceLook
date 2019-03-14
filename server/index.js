@@ -36,18 +36,13 @@ if (!isDev && cluster.isMaster) {
   const crypto = require("crypto");
   const cookie = require("cookie");
   const session = require("express-session");
-  const cors = require("cors");
 
   const app = express();
   const router = express.Router();
-  console.log("before cors call");
-
-  app.use(cors());
-  console.log("after cors call");
 
   const User = require("./models/users");
   const Rooms = require("./models/rooms");
-  //app.use(express.static(path.resolve(__dirname, "../react-ui")));
+  app.use(express.static(path.resolve(__dirname, "../react-ui/public")));
 
   // this is our MongoDB database
   const dbRoute =
@@ -69,21 +64,19 @@ if (!isDev && cluster.isMaster) {
   app.use(bodyParser.json());
   app.use(logger("dev"));
 
-  app.use(express.static("static"));
-
-  // app.use(function(req, res, next) {
-  //   res.setHeader("Access-Control-Allow-Origin", "*");
-  //   res.setHeader(
-  //     "Access-Control-Allow-Headers",
-  //     "Origin, X-Requested-With, Content-Type, Accept"
-  //   );
-  //   res.setHeader(
-  //     "Access-Control-Allow-Methods",
-  //     "GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS"
-  //   );
-  //   res.setHeader("Access-Control-Allow-Credentials", true);
-  //   next();
-  // });
+  app.use(function(req, res, next) {
+    res.setHeader("Access-Control-Allow-Origin", req.headers.origin);
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS"
+    );
+    res.setHeader("Access-Control-Allow-Credentials", true);
+    next();
+  });
 
   // ------------------------
   app.use(function(req, res, next) {
@@ -132,20 +125,6 @@ if (!isDev && cluster.isMaster) {
     next();
   };
 
-  // https://www.npmjs.com/package/axios
-  // app.use(function(req, res, next) {
-  //   res.setHeader("Access-Control-Allow-Origin", req.headers.origin);
-  //   res.setHeader(
-  //     "Access-Control-Allow-Headers",
-  //     "Origin, X-Requested-With, Content-Type, Accept"
-  //   );
-  //   res.setHeader(
-  //     "Access-Control-Allow-Methods",
-  //     "GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS"
-  //   );
-  //   res.setHeader("Access-Control-Allow-Credentials", true);
-  //   next();
-  // });
   console.log("set the cookie");
   app.use(function(req, res, next) {
     req.user = "user" in req.session ? req.session.user : null;
