@@ -146,6 +146,7 @@ if (!isDev && cluster.isMaster) {
 
   router.get("/rooms", function(req, res, next) {
     // find the last room in the DB.
+
     Rooms.find({})
       .sort({ time: -1 })
       .limit(6)
@@ -344,10 +345,6 @@ if (!isDev && cluster.isMaster) {
     });
   });
 
-  // router.get('/login', function(req, res) {
-  //     console.log("login page");
-  //     return res.json("in login page");
-  // });
   // append /api for our http requests
   app.use("/api", router);
   // app.user("")

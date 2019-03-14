@@ -37,7 +37,7 @@ class App extends Component {
             <LoginPage onLoginPage={this.checkLoginPage} />
           </Route>
           <Route path="/register" component={RegisterForm} />
-          <Route path="/gameRooms">
+          <Route path="/rooms">
             <GameRooms isLogin={this.state.isLogin} />
           </Route>
 
