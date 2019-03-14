@@ -1,0 +1,21 @@
+.btn {
+    height: 50px;
+    margin: 10px;
+    border-radius: 25px;
+    padding: 0 30px;
+    background: #57b846;
+    font-size: 15px;
+    color: #fff;
+}
+
+.form_element {
+    height: 50px;
+    margin: 10px;
+    border-radius: 25px;
+    padding: 0 30px;
+}
+
+body {
+    padding: 20px;
+    background: url(../media/background.png);
+}
