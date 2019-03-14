@@ -6,7 +6,9 @@ const path = require("path");
 const cluster = require("cluster");
 const numCPUs = require("os").cpus().length;
 const isDev = process.env.NODE_ENV !== "production";
+
 let API_PORT = process.env.PORT;
+console.log(API_PORT);
 if (API_PORT == null || API_PORT == "") {
   API_PORT = 3001;
 }
