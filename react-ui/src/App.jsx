@@ -12,13 +12,18 @@ class App extends Component {
     this.state = {
       isLogin: false
     };
-    // api.get("/user/", null).then(res => {
-    //   if (res.status === 200) {
-    //     this.setState({ isLogin: true });
-    //   } else {
-    //     this.setState({ isLogin: false });
-    //   }
-    // });
+    api
+      .get("/user/", null)
+      .then(res => {
+        if (res.status === 200) {
+          this.setState({ isLogin: true });
+        } else {
+          this.setState({ isLogin: false });
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
   checkLoginPage = value => {
     this.setState({ isLogin: true });
@@ -34,6 +39,10 @@ class App extends Component {
           <Route path="/register" component={RegisterForm} />
           <Route path="/gameRooms">
             <GameRooms isLogin={this.state.isLogin} />
+          </Route>
+
+          <Route path="/?" component={RegisterForm}>
+            {console.log(this.props.location)}
           </Route>
         </Switch>
       </div>

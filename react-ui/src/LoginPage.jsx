@@ -12,7 +12,7 @@ class LoginPage extends Component {
       <div className="container-fluid">
         <div className="row align-items-center">
           <div className="col-md-4 offset-md-4">
-            <img src="/media/smile.png" alt="logo" />
+            <img src="./media/smile.png" alt="logo" />
           </div>
           <LoginForm
             className="col-md-4 offset-md-4"
