@@ -89,7 +89,7 @@ class LoginForm extends Component {
       );
     } else {
       console.log("add GameRoom");
-      return <Redirect to="/gameRooms" />;
+      return <Redirect to="/rooms" />;
     }
   }
 
