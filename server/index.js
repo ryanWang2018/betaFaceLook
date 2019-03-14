@@ -42,7 +42,7 @@ if (!isDev && cluster.isMaster) {
 
   const User = require("./models/users");
   const Rooms = require("./models/rooms");
-  app.use(express.static(path.resolve(__dirname, "../react-ui/public")));
+  app.use(express.static(path.resolve(__dirname, "../react-ui/build")));
 
   // this is our MongoDB database
   const dbRoute =
@@ -352,11 +352,11 @@ if (!isDev && cluster.isMaster) {
   app.use("/api", router);
   // app.user("")
 
-  app.get("*", function(request, response) {
-    response.sendFile(
-      path.resolve(__dirname, "../react-ui/public/", "index.html")
-    );
-  });
+  // app.get("*", function(request, response) {
+  //   response.sendFile(
+  //     path.resolve(__dirname, "../react-ui/public/", "index.html")
+  //   );
+  // });
 
   // launch our backend into a port
   app.listen(PORT, function() {
