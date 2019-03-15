@@ -339,11 +339,6 @@ if (!isDev && cluster.isMaster) {
       );
     });
   });
-  app.get("*", function(request, response) {
-    response.sendFile(
-      path.resolve(__dirname, "../react-ui/public", "index.html")
-    );
-  });
 
   // append /api for our http requests
   app.use("/api", router);

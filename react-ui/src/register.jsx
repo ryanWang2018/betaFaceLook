@@ -121,7 +121,6 @@ class RegisterForm extends Component {
   }
   register = event => {
     event.preventDefault();
-
     api
       .post("/register", {
         username: this.state.username,

@@ -4,7 +4,6 @@ import RegisterForm from "./register";
 import GameRooms from "./GameRooms.jsx";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import api from "./api";
-import { createHistory } from "history";
 
 class App extends Component {
   constructor(props) {
@@ -19,6 +18,7 @@ class App extends Component {
       .get("/user", null)
       .then(res => {
         if (res.status === 200) {
+          console.log(res);
           this.setState({ isLogin: true });
         } else {
           this.setState({ isLogin: false });
