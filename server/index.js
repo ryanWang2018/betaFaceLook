@@ -159,17 +159,23 @@ if (!isDev && cluster.isMaster) {
     return;
   });
 
-  // router.get("/api/rooms", function(req, res, next) {
-  //   // find the last room in the DB.
+  router.get("/api/rooms", function(req, res, next) {
+    // find the last room in the DB.
 
-  //   Rooms.find({})
-  //     .sort({ time: -1 })
-  //     .limit(6)
-  //     .exec(function(err, rooms) {
-  //       if (err) return res.status(500).end(err);
-  //       return res.json(rooms);
-  //     });
-  // });
+    Rooms.find({})
+      .sort({ time: -1 })
+      .limit(6)
+      .exec(function(err, rooms) {
+        if (err) return res.status(500).end(err);
+        return res.json(rooms);
+      });
+  });
+
+  router.get("/rooms", function(req, res, next) {
+    // find the last room in the DB.
+
+    res.redirect("/");
+  });
 
   router.post("/joinRoom", function(req, res, next) {
     let id = req.body._id;
