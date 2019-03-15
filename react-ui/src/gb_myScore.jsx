@@ -1,8 +1,4 @@
 import React, { Component } from "react";
-import api from "./api.js";
-import LoginForm from "./loginForm.jsx";
-import ReactDOM from "react-dom";
-
 class Gb_myScore extends Component {
   state = {};
   render() {

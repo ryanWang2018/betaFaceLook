@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import LoginPage from "./LoginPage";
 import RegisterForm from "./register";
 import GameRooms from "./GameRooms.jsx";
-import LoginForm from "./loginForm";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import api from "./api";
 
@@ -16,7 +15,7 @@ class App extends Component {
 
   componentDidMount() {
     api
-      .get("/user/", null)
+      .get("/user", null)
       .then(res => {
         if (res.status === 200) {
           this.setState({ isLogin: true });

@@ -1,8 +1,4 @@
 import React, { Component } from "react";
-import api from "./api.js";
-import LoginForm from "./loginForm.jsx";
-import ReactDOM from "react-dom";
-import Gb_myScore from "./gb_myScore.jsx";
 
 class GameBoard extends Component {
   constructor(props) {
