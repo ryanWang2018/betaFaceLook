@@ -150,6 +150,10 @@ if (!isDev && cluster.isMaster) {
     next();
   });
 
+  app.get("/", function(req, res, next) {
+    res.render("index");
+  });
+
   router.get("/register", function(req, res, next) {
     return;
   });

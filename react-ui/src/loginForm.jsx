@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import api from "./api.js";
 import ErrorMessage from "./errorMessage.jsx";
-import { Redirect } from "react-router";
+import { Redirect, Link } from "react-router";
 class LoginForm extends Component {
   constructor(props) {
     super(props);
@@ -33,7 +33,7 @@ class LoginForm extends Component {
             error={this.state.error}
           />
           <div className="text-right">
-            <a href="/register">register</a>
+            <Link to="\register" />
           </div>
 
           <form onSubmit={this.login}>
