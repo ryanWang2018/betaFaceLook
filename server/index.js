@@ -351,7 +351,7 @@ if (!isDev && cluster.isMaster) {
   });
 
   // append /api for our http requests
-  app.use("/api", router);
+  app.use("/", router);
   // app.user("")
 
   // app.get("*", function(request, response) {
