@@ -65,10 +65,16 @@ if (!isDev && cluster.isMaster) {
   app.use(logger("dev"));
 
   app.use(function(req, res, next) {
-    res.setHeader(
-      "Access-Control-Allow-Origin",
-      "https://hidden-cliffs-49484.herokuapp.com"
-    );
+    var allowedOrigins = [
+      "https://hidden-cliffs-49484.herokuapp.com",
+      "http://localhost:3001",
+      "http://127.0.0.1:5000",
+      "http://localhost:4000"
+    ];
+    var origin = req.headers.origin;
+    if (allowedOrigins.indexOf(origin) > -1) {
+      res.setHeader("Access-Control-Allow-Origin", origin);
+    }
     res.setHeader(
       "Access-Control-Allow-Headers",
       "Origin, X-Requested-With, Content-Type, Accept"
