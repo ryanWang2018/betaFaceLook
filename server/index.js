@@ -141,7 +141,7 @@ if (!isDev && cluster.isMaster) {
   });
 
   router.get("/register", function(req, res, next) {
-    console.log("get register");
+    return;
   });
 
   router.get("/rooms", function(req, res, next) {

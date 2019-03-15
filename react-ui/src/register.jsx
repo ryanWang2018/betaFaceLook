@@ -26,6 +26,17 @@ class RegisterForm extends Component {
     });
   }
 
+  componentDidMount(prevProps, prevState) {
+    api
+      .get("/register", null)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   render() {
     return (
       <div>
