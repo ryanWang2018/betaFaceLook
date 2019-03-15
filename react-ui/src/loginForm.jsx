@@ -34,7 +34,7 @@ class LoginForm extends Component {
             error={this.state.error}
           />
           <div className="text-right">
-            <Link to="\register" />
+            <Link to="\register"> register</Link>
           </div>
 
           <form onSubmit={this.login}>
