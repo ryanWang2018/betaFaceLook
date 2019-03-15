@@ -8,7 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 
 ReactDOM.render(
-  <BrowserRouter basename="https://hidden-cliffs-49484.herokuapp.com/api">
+  <BrowserRouter>
     <App />
   </BrowserRouter>,
   document.getElementById("root")
