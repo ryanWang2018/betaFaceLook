@@ -70,6 +70,7 @@ if (!isDev && cluster.isMaster) {
       "http://localhost:3001",
       "http://localhost:5000",
       "http://localhost:3000",
+      "http://localhost:3002",
       "http://localhost:4000"
     ];
     var origin = req.headers.origin;
@@ -158,17 +159,17 @@ if (!isDev && cluster.isMaster) {
     return;
   });
 
-  router.get("/rooms", function(req, res, next) {
-    // find the last room in the DB.
+  // router.get("/api/rooms", function(req, res, next) {
+  //   // find the last room in the DB.
 
-    Rooms.find({})
-      .sort({ time: -1 })
-      .limit(6)
-      .exec(function(err, rooms) {
-        if (err) return res.status(500).end(err);
-        return res.json(rooms);
-      });
-  });
+  //   Rooms.find({})
+  //     .sort({ time: -1 })
+  //     .limit(6)
+  //     .exec(function(err, rooms) {
+  //       if (err) return res.status(500).end(err);
+  //       return res.json(rooms);
+  //     });
+  // });
 
   router.post("/joinRoom", function(req, res, next) {
     let id = req.body._id;
