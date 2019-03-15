@@ -6,7 +6,7 @@ import { Redirect } from "react-router";
 class GameRooms extends Component {
   constructor(props) {
     super(props);
-    state = {
+    this.state = {
       rooms: [],
       time: Date.now(),
       exit: false
