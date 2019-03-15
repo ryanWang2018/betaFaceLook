@@ -1,21 +1,15 @@
 import React, { Component } from "react";
 import api from "./api.js";
-import ReactDOM from "react-dom";
 import ErrorMessage from "./errorMessage.jsx";
-import GameRooms from "./GameRooms.jsx";
-import Cookies from "js-cookie";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Redirect } from "react-router";
 class LoginForm extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       error: { content: "", shown: "" },
       username: "",
       password: "",
       remember: false,
-      cookies: Cookies.get("username"),
       isAuth: false
     };
     this.handleOnChanges = this.handleOnChanges.bind(this);
@@ -32,14 +26,12 @@ class LoginForm extends Component {
 
   render() {
     if (this.state.isAuth === false) {
-      console.log("kfjekwfkewnfew");
       return (
         <div>
           <ErrorMessage
             onChange={this.handleOnError}
             error={this.state.error}
           />
-          {this.state.cookies}
           <div className="text-right">
             <a href="/register">register</a>
           </div>
@@ -110,8 +102,6 @@ class LoginForm extends Component {
       })
       .then(res => {
         if (res.status === 200) {
-          this.props.onLoginForm(true);
-          console.log("set the loginForm to True");
           this.setState({ isAuth: true });
         }
       })

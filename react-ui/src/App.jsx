@@ -12,6 +12,9 @@ class App extends Component {
     this.state = {
       isLogin: false
     };
+  }
+
+  componentDidMount() {
     api
       .get("/user/", null)
       .then(res => {
@@ -25,24 +28,19 @@ class App extends Component {
         console.log(err);
       });
   }
-  checkLoginPage = value => {
-    this.setState({ isLogin: true });
-  };
 
   render() {
     return (
       <div>
         <Switch>
           <Route exact path="/">
-            <LoginPage onLoginPage={this.checkLoginPage} />
-          </Route>
-          <Route path="/register" component={RegisterForm} />
-          <Route path="/rooms">
-            <GameRooms isLogin={this.state.isLogin} />
+            <LoginPage isLogin={this.state.isLogin} />
           </Route>
 
-          <Route path="/?" component={RegisterForm}>
-            {console.log(this.props.location)}
+          <Route path="/register" component={RegisterForm} />
+
+          <Route path="/rooms">
+            <GameRooms isLogin={this.state.isLogin} />
           </Route>
         </Switch>
       </div>

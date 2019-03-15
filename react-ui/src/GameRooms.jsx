@@ -6,6 +6,7 @@ import LoginPage from "./loginForm.jsx";
 import ReactDOM from "react-dom";
 import { Redirect } from "react-router";
 class GameRooms extends Component {
+  constructor(props) {}
   state = {
     rooms: [],
     time: Date.now(),
@@ -29,7 +30,6 @@ class GameRooms extends Component {
   };
 
   handlerGetRooms() {
-    console.log("getroom");
     api
       .get("/rooms", null)
       .then(res => {
@@ -68,18 +68,15 @@ class GameRooms extends Component {
   };
   // called when the object state changes, and get data from server.
   componentDidMount(prevProps, prevState) {
-    console.log("reflesh");
     this.interval = setInterval(() => this.handlerGetRooms(), 3000);
   }
   // clean up data before something is removed from DOM.
   componentWillUnmount() {
-    console.log("cleanning interval");
     clearInterval(this.interval);
   }
 
   handleSign_out = () => {
     //add the updated rooms into database
-    console.log("front jkfehwkjfewkjfbekwj");
     api
       .get("/signout/")
       .then(res => {})
@@ -130,5 +127,4 @@ class GameRooms extends Component {
     }
   }
 }
-
 export default GameRooms;

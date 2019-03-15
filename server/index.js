@@ -152,7 +152,6 @@ if (!isDev && cluster.isMaster) {
       .limit(6)
       .exec(function(err, rooms) {
         if (err) return res.status(500).end(err);
-
         return res.json(rooms);
       });
   });

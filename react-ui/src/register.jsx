@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import api from "./api.js";
-import ErrorMessage from './errorMessage.jsx';
+import ErrorMessage from "./errorMessage.jsx";
 class RegisterForm extends Component {
   constructor(props) {
     super(props);
@@ -10,7 +10,7 @@ class RegisterForm extends Component {
       email: "",
       first_name: "",
       last_name: "",
-      error: { content: "", shown: "" },
+      error: { content: "", shown: "" }
     };
     this.handleOnChanges = this.handleOnChanges.bind(this);
   }
@@ -29,7 +29,9 @@ class RegisterForm extends Component {
   render() {
     return (
       <div>
-        <a href="/" className="btn btn-sm btn-dark" role="button">Back</a>
+        <a href="/" className="btn btn-sm btn-dark" role="button">
+          Back
+        </a>
         <ErrorMessage onChange={this.handleOnError} error={this.state.error} />
         <form
           onSubmit={this.register}
@@ -39,7 +41,7 @@ class RegisterForm extends Component {
           <div className="register_form_elmt">
             <label>
               username:
-            <input
+              <input
                 className="register_form_element"
                 type="text"
                 name="username"
@@ -54,7 +56,7 @@ class RegisterForm extends Component {
           <div className="register_form_elmt">
             <label>
               password:
-            <input
+              <input
                 className="register_form_element"
                 type="password"
                 name="password"
@@ -69,7 +71,7 @@ class RegisterForm extends Component {
           <div className="register_form_elmt">
             <label>
               E-mail:
-            <input
+              <input
                 className="register_form_element"
                 type="email"
                 name="email"
@@ -84,7 +86,7 @@ class RegisterForm extends Component {
           <div className="register_form_elmt">
             <label>
               First Name:
-            <input
+              <input
                 className="register_form_element"
                 type="text"
                 name="first_name"
@@ -98,7 +100,7 @@ class RegisterForm extends Component {
           <div className="register_form_elmt">
             <label>
               Last Name:
-            <input
+              <input
                 className="register_form_element"
                 type="text"
                 name="last_name"
@@ -112,10 +114,9 @@ class RegisterForm extends Component {
 
           <button type="submit" id="register_btn" className="btn">
             Register
-        </button>
+          </button>
         </form>
       </div>
-
     );
   }
   register = event => {
@@ -146,8 +147,7 @@ class RegisterForm extends Component {
 
   handleOnSuccess = () => {
     this.handleOnError("registered successfully!");
-
-  }
+  };
 
   handleOnError = (err, shown) => {
     let error = { ...this.state.error };

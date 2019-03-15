@@ -3,10 +3,10 @@ import LoginForm from "./loginForm";
 import { Link, Route, Switch } from "react-router-dom";
 import RegisterForm from "./register.jsx";
 class LoginPage extends Component {
-  checkLoginForm = () => {
-    console.log("set the loginPage to true");
-    this.props.onLoginPage(true);
-  };
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <div className="container-fluid">
@@ -14,10 +14,7 @@ class LoginPage extends Component {
           <div className="col-md-4 offset-md-4">
             <img src="./media/smile.png" alt="logo" />
           </div>
-          <LoginForm
-            className="col-md-4 offset-md-4"
-            onLoginForm={this.checkLoginForm}
-          />
+          <LoginForm className="col-md-4 offset-md-4" />
         </div>
       </div>
     );
