@@ -4,14 +4,19 @@ import api from "./api.js";
 import Cookies from "js-cookie";
 import { Redirect } from "react-router";
 class GameRooms extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      rooms: [],
-      time: Date.now(),
-      exit: false
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     rooms: [],
+  //     time: Date.now(),
+  //     exit: false
+  //   };
+  // }
+  state = {
+    rooms: [],
+    time: Date.now(),
+    exit: false
+  };
 
   handleAdd_room = () => {
     //add the updated rooms into database
@@ -47,7 +52,10 @@ class GameRooms extends Component {
       .delete("/room/" + room._id + "/")
       .then(res => {
         let rooms = res.data;
-        this.setState({ rooms });
+
+        this.setState(rooms => ({
+          rooms: rooms
+        }));
       })
       .catch(err => {
         console.log(err);
@@ -68,6 +76,7 @@ class GameRooms extends Component {
   };
   // called when the object state changes, and get data from server.
   componentDidMount(prevProps, prevState) {
+    console.log("haha");
     this.interval = setInterval(() => this.handlerGetRooms(), 3000);
   }
   // clean up data before something is removed from DOM.
@@ -89,8 +98,7 @@ class GameRooms extends Component {
   render() {
     if (this.state.exit == true) {
       return <Redirect to="/" />;
-    }
-    if (this.props.isLogin == true) {
+    } else {
       return (
         <div>
           <button
@@ -122,8 +130,6 @@ class GameRooms extends Component {
           </button>
         </div>
       );
-    } else {
-      return <div />;
     }
   }
 }
