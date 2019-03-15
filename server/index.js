@@ -42,7 +42,7 @@ if (!isDev && cluster.isMaster) {
 
   const User = require("./models/users");
   const Rooms = require("./models/rooms");
-  app.use(express.static(path.resolve(__dirname, "../react-ui/public/build")));
+  app.use(express.static(path.resolve(__dirname, "../react-ui/build")));
 
   // this is our MongoDB database
   const dbRoute =
