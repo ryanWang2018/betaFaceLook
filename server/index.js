@@ -165,10 +165,6 @@ if (!isDev && cluster.isMaster) {
     ) {
       let user_list = room.users;
       let username = req.session.user._id;
-      console.log(
-        "thfkewjfhkjewfkjewfhkewjhfjewhfkjewhakfjhekwjhfew",
-        req.session.user
-      );
       var pos = user_list.indexOf(username);
       if (pos < 0) {
         room.users.push(username);
@@ -229,12 +225,6 @@ if (!isDev && cluster.isMaster) {
     var last_name = req.body.last_name;
     var salt = generateSalt();
     var hash = generateHash(password, salt);
-
-    app.get("*", function(request, response) {
-      response.sendFile(
-        path.resolve(__dirname, "../react-ui/build", "index.html")
-      );
-    });
 
     // insert new user into the database
     User.findOne({ _id: username }, function(err, user) {
@@ -348,6 +338,11 @@ if (!isDev && cluster.isMaster) {
         }
       );
     });
+  });
+  app.get("*", function(request, response) {
+    response.sendFile(
+      path.resolve(__dirname, "../react-ui/public", "index.html")
+    );
   });
 
   // append /api for our http requests

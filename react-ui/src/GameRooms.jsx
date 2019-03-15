@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import { Redirect } from "react-router";
 class GameRooms extends Component {
   constructor(props) {
+    super(props);
     state = {
       rooms: [],
       time: Date.now(),

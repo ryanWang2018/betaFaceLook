@@ -9,15 +9,8 @@ import LoginPage from "./LoginPage.jsx";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 
-import { useRouterHistory } from "react-router";
-import { createHistory } from "history";
-
-const history = useRouterHistory(createHistory)({
-  basename: "https://hidden-cliffs-49484.herokuapp.com/api"
-});
-
 ReactDOM.render(
-  <BrowserRouter history={history}>
+  <BrowserRouter basename="https://hidden-cliffs-49484.herokuapp.com/api">
     <App />
   </BrowserRouter>,
   document.getElementById("root")
