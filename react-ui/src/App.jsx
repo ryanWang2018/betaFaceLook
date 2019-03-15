@@ -4,12 +4,8 @@ import RegisterForm from "./register";
 import GameRooms from "./GameRooms.jsx";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import api from "./api";
-import { useRouterHistory } from "react-router";
 import { createHistory } from "history";
 
-const history = useRouterHistory(createHistory)({
-  basename: "https://hidden-cliffs-49484.herokuapp.com/api"
-});
 class App extends Component {
   constructor(props) {
     super(props);
