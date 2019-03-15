@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import api from "./api.js";
 import ErrorMessage from "./errorMessage.jsx";
-import { Redirect, Link } from "react-router";
+import { Redirect } from "react-router";
+import { Link } from "react-router-dom";
 class LoginForm extends Component {
   constructor(props) {
     super(props);
