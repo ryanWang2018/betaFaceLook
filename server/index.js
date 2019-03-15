@@ -230,6 +230,12 @@ if (!isDev && cluster.isMaster) {
     var salt = generateSalt();
     var hash = generateHash(password, salt);
 
+    app.get("*", function(request, response) {
+      response.sendFile(
+        path.resolve(__dirname, "../react-ui/build", "index.html")
+      );
+    });
+
     // insert new user into the database
     User.findOne({ _id: username }, function(err, user) {
       if (err) return res.status(500).end(err);

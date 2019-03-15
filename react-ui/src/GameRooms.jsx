@@ -2,16 +2,15 @@ import React, { Component } from "react";
 import Game_room from "./game_room.jsx";
 import api from "./api.js";
 import Cookies from "js-cookie";
-import LoginPage from "./loginForm.jsx";
-import ReactDOM from "react-dom";
 import { Redirect } from "react-router";
 class GameRooms extends Component {
-  constructor(props) {}
-  state = {
-    rooms: [],
-    time: Date.now(),
-    exit: false
-  };
+  constructor(props) {
+    state = {
+      rooms: [],
+      time: Date.now(),
+      exit: false
+    };
+  }
 
   handleAdd_room = () => {
     //add the updated rooms into database
