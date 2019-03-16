@@ -175,7 +175,6 @@ if (!isDev && cluster.isMaster) {
           })
         );
         console.log("at get api/rooms");
-        console.log(req.session.user._id);
         return res.json(rooms);
       });
   });
