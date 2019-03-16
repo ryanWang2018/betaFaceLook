@@ -141,7 +141,7 @@ if (!isDev && cluster.isMaster) {
   };
 
   app.use(function(req, res, next) {
-    console.log("set the cookie");
+    console.log();
     req.user = "user" in req.session ? req.session.user : null;
 
     let username = req.user ? req.user._id : "";
@@ -167,17 +167,7 @@ if (!isDev && cluster.isMaster) {
       .limit(6)
       .exec(function(err, rooms) {
         if (err) return res.status(500).end(err);
-        console.log(req);
-        req.user = "user" in req.session ? req.session.user : null;
-        let username = req.user ? req.user._id : "";
-        console.log(req.session.user);
-        res.setHeader(
-          "Set-Cookie",
-          cookie.serialize("username", username, {
-            path: "/",
-            maxAge: 60 * 60 * 24 * 7 // 1 week in number of seconds
-          })
-        );
+        console.log("efefew", req);
 
         console.log("at get api/rooms");
         return res.json(rooms);
@@ -264,6 +254,7 @@ if (!isDev && cluster.isMaster) {
       if (user.hash !== generateHash(password, user.salt))
         return res.status(401).end("username and password do not match");
       req.session.user = user;
+      console.log(req.session.user);
 
       // initialize cookie
       res.setHeader(
@@ -285,6 +276,7 @@ if (!isDev && cluster.isMaster) {
   });
 
   router.get("/api/signout/", function(req, res, next) {
+    console.log("in logout");
     req.session.destroy();
 
     res.setHeader(
