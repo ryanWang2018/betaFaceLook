@@ -168,12 +168,14 @@ if (!isDev && cluster.isMaster) {
         if (err) return res.status(500).end(err);
         return res.json(rooms);
       });
+    return;
   });
 
   router.get("/rooms", isAuthenticated, function(req, res, next) {
     // find the last room in the DB.
 
-    return res.redirect("/");
+    res.redirect("/");
+    return res.json();
   });
 
   router.post("/api/joinRoom", function(req, res, next) {

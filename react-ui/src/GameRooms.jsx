@@ -1,22 +1,16 @@
 import React, { Component } from "react";
 import Game_room from "./game_room.jsx";
 import api from "./api.js";
-import Cookies from "js-cookie";
 import { Redirect } from "react-router";
 class GameRooms extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     rooms: [],
-  //     time: Date.now(),
-  //     exit: false
-  //   };
-  // }
-  state = {
-    rooms: [],
-    time: Date.now(),
-    exit: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      rooms: [],
+      time: Date.now(),
+      exit: false
+    };
+  }
 
   handleAdd_room = () => {
     //add the updated rooms into database
@@ -93,7 +87,7 @@ class GameRooms extends Component {
     //this.handlerLongPolling();
   }
   // clean up data before something is removed from DOM.
-  componentWillUnmount() {}
+  //componentWillUnmount() {}
 
   handleSign_out = () => {
     //add the updated rooms into database
