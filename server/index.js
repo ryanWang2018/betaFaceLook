@@ -141,7 +141,7 @@ if (!isDev && cluster.isMaster) {
   };
 
   app.use(function(req, res, next) {
-    console.log();
+    console.log("req session ", req.session);
     req.user = "user" in req.session ? req.session.user : null;
 
     let username = req.user ? req.user._id : "";
@@ -161,7 +161,7 @@ if (!isDev && cluster.isMaster) {
 
   router.get("/api/rooms", function(req, res, next) {
     // find the last room in the DB.
-
+    console.log("get rooms ", req.session);
     Rooms.find({})
       .sort({ time: -1 })
       .limit(6)
