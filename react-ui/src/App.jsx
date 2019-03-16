@@ -15,7 +15,7 @@ class App extends Component {
 
   componentDidMount() {
     api
-      .get("/user", null)
+      .get("/api/user", null)
       .then(res => {
         if (res.status === 200) {
           console.log(res);

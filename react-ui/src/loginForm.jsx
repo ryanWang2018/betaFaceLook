@@ -97,7 +97,7 @@ class LoginForm extends Component {
   login = event => {
     event.preventDefault();
     api
-      .post("/signin", {
+      .post("/api/signin", {
         username: this.state.username,
         password: this.state.password
       })

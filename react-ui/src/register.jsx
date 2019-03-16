@@ -28,7 +28,7 @@ class RegisterForm extends Component {
 
   componentDidMount(prevProps, prevState) {
     api
-      .get("/register", null)
+      .get("/api/register", null)
       .then(res => {
         console.log(res);
       })
@@ -133,7 +133,7 @@ class RegisterForm extends Component {
   register = event => {
     event.preventDefault();
     api
-      .post("/register", {
+      .post("/api/register", {
         username: this.state.username,
         password: this.state.password,
         email: this.state.email,

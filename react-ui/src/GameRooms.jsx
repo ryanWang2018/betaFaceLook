@@ -21,7 +21,7 @@ class GameRooms extends Component {
   handleAdd_room = () => {
     //add the updated rooms into database
     api
-      .post("/room", { owner: Cookies.get("username"), current_users: 0 })
+      .post("/api/room", { owner: Cookies.get("username"), current_users: 0 })
       .then(res => {
         console.log(res.status);
         let rooms = res.data;
@@ -36,7 +36,7 @@ class GameRooms extends Component {
 
   handlerGetRooms() {
     api
-      .get("/rooms", null)
+      .get("/api/rooms", null)
       .then(res => {
         console.log(res.data);
         let rooms = res.data;
@@ -49,7 +49,7 @@ class GameRooms extends Component {
 
   handlerDelete = room => {
     api
-      .delete("/room/" + room._id + "/")
+      .delete("/api/room/" + room._id + "/")
       .then(res => {
         let rooms = res.data;
 
@@ -68,7 +68,7 @@ class GameRooms extends Component {
 
   handlerIncrement = room => {
     api
-      .post("/joinRoom/", room)
+      .post("/api/joinRoom/", room)
       .then(res => {})
       .catch(err => {
         console.log(err);
@@ -87,7 +87,7 @@ class GameRooms extends Component {
   handleSign_out = () => {
     //add the updated rooms into database
     api
-      .get("/signout/")
+      .get("/api/signout/")
       .then(res => {})
       .catch(err => {
         console.log(err);

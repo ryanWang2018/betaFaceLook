@@ -151,14 +151,6 @@ if (!isDev && cluster.isMaster) {
     next();
   });
 
-  app.get("/", function(req, res, next) {
-    res.render("index");
-  });
-
-  router.get("/register", function(req, res, next) {
-    return;
-  });
-
   router.get("/api/rooms", function(req, res, next) {
     // find the last room in the DB.
 
@@ -171,13 +163,13 @@ if (!isDev && cluster.isMaster) {
       });
   });
 
-  router.get("/rooms", function(req, res, next) {
+  router.get("/rooms", isAuthenticated, function(req, res, next) {
     // find the last room in the DB.
 
     res.redirect("/");
   });
 
-  router.post("/joinRoom", function(req, res, next) {
+  router.post("/api/joinRoom", function(req, res, next) {
     let id = req.body._id;
 
     Rooms.findOne({ _id: new mongoose.Types.ObjectId(id) }, function(
@@ -202,7 +194,7 @@ if (!isDev && cluster.isMaster) {
     });
   });
 
-  router.post("/room", function(req, res, next) {
+  router.post("/api/room", function(req, res, next) {
     let owner = req.body.owner;
     let current_users = req.body.current_users;
     // find the last room in the DB.
@@ -216,7 +208,7 @@ if (!isDev && cluster.isMaster) {
       });
   });
 
-  router.delete("/room/:id", function(req, res, next) {
+  router.delete("/api/room/:id", function(req, res, next) {
     let id = req.params.id;
     // find the last room in the DB.
     Rooms.deleteMany({ _id: new mongoose.Types.ObjectId(id) }, function(
@@ -234,48 +226,52 @@ if (!isDev && cluster.isMaster) {
       });
   });
 
-  router.post("/register", function(req, res, next) {
-    if (!("username" in req.body))
-      return res.status(400).end("username is missing");
-    if (!("password" in req.body))
-      return res.status(400).end("password is missing");
-    var username = req.body.username;
-    var password = req.body.password;
-    var email = req.body.email;
-    var first_name = req.body.first_name;
-    var last_name = req.body.last_name;
-    var salt = generateSalt();
-    var hash = generateHash(password, salt);
-
-    // insert new user into the database
-    User.findOne({ _id: username }, function(err, user) {
-      if (err) return res.status(500).end(err);
-      if (user)
-        return res
-          .status(401)
-          .end(username + " exists already, try another name");
-      User.insertMany(
-        [
-          {
-            _id: username,
-            hash: hash,
-            salt: salt,
-            email: email,
-            first_name: first_name,
-            last_name: last_name
-          }
-        ],
-        function(err, result) {
-          if (err) {
-            return res.status(500).end("insertion error");
-          }
-          return res.json(user);
-        }
-      );
-    });
+  router.get("/register", function(req, res, next) {
+    return redirect("/register");
   });
 
-  router.post("/signin", function(req, res, next) {
+  // router.post("/register", function(req, res, next) {
+  //   if (!("username" in req.body))
+  //     return res.status(400).end("username is missing");
+  //   if (!("password" in req.body))
+  //     return res.status(400).end("password is missing");
+  //   var username = req.body.username;
+  //   var password = req.body.password;
+  //   var email = req.body.email;
+  //   var first_name = req.body.first_name;
+  //   var last_name = req.body.last_name;
+  //   var salt = generateSalt();
+  //   var hash = generateHash(password, salt);
+
+  //   // insert new user into the database
+  //   User.findOne({ _id: username }, function(err, user) {
+  //     if (err) return res.status(500).end(err);
+  //     if (user)
+  //       return res
+  //         .status(401)
+  //         .end(username + " exists already, try another name");
+  //     User.insertMany(
+  //       [
+  //         {
+  //           _id: username,
+  //           hash: hash,
+  //           salt: salt,
+  //           email: email,
+  //           first_name: first_name,
+  //           last_name: last_name
+  //         }
+  //       ],
+  //       function(err, result) {
+  //         if (err) {
+  //           return res.status(500).end("insertion error");
+  //         }
+  //         return res.json(user);
+  //       }
+  //     );
+  //   });
+  // });
+
+  router.post("/api/signin", function(req, res, next) {
     let username = req.body.username;
     let password = req.body.password;
 
@@ -299,7 +295,11 @@ if (!isDev && cluster.isMaster) {
     });
   });
 
-  router.get("/signout/", function(req, res, next) {
+  router.get("/signin", function(req, res, next) {
+    return redirect("/");
+  });
+
+  router.get("/api/signout/", function(req, res, next) {
     req.session.destroy();
 
     res.setHeader(
@@ -312,7 +312,11 @@ if (!isDev && cluster.isMaster) {
     return res.json("haha");
   });
 
-  router.get("/user", function(req, res, next) {
+  router.get("/signin", function(req, res, next) {
+    return redirect("/");
+  });
+
+  router.get("/api/user", function(req, res, next) {
     if (req.session.user) {
       return res.json(req.session.user);
     } else {
@@ -320,7 +324,7 @@ if (!isDev && cluster.isMaster) {
     }
   });
 
-  router.post("/register", function(req, res, next) {
+  router.post("/api/register", function(req, res, next) {
     if (!("username" in req.body))
       return res.status(400).end("username is missing");
     if (!("password" in req.body))
