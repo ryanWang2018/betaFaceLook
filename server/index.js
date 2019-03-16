@@ -216,7 +216,7 @@ if (!isDev && cluster.isMaster) {
       .limit(6)
       .exec(function(err, rooms) {
         if (err) return res.status(500).end(err);
-        longpoll.publish("/poll", json(rooms));
+        //longpoll.publish("/poll", json(rooms));
         return res.json(rooms);
       });
   });

@@ -90,7 +90,7 @@ class GameRooms extends Component {
   // called when the object state changes, and get data from server.
   componentDidMount(prevProps, prevState) {
     this.handlerGetRooms();
-    this.handlerLongPolling();
+    //this.handlerLongPolling();
   }
   // clean up data before something is removed from DOM.
   componentWillUnmount() {}
