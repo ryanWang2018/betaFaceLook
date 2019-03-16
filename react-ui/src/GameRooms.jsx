@@ -21,7 +21,10 @@ class GameRooms extends Component {
   handleAdd_room = () => {
     //add the updated rooms into database
     api
-      .post("/api/room", { owner: Cookies.get("username"), current_users: 0 })
+      .post("/api/Addroom", {
+        owner: Cookies.get("username"),
+        current_users: 0
+      })
       .then(res => {
         console.log(res.status);
         let rooms = res.data;

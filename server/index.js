@@ -166,7 +166,7 @@ if (!isDev && cluster.isMaster) {
   router.get("/rooms", isAuthenticated, function(req, res, next) {
     // find the last room in the DB.
 
-    res.redirect("/");
+    return res.redirect("/");
   });
 
   router.post("/api/joinRoom", function(req, res, next) {
@@ -194,7 +194,7 @@ if (!isDev && cluster.isMaster) {
     });
   });
 
-  router.post("/api/room", function(req, res, next) {
+  router.post("/api/Addroom", function(req, res, next) {
     let owner = req.body.owner;
     let current_users = req.body.current_users;
     // find the last room in the DB.
@@ -227,7 +227,7 @@ if (!isDev && cluster.isMaster) {
   });
 
   router.get("/register", function(req, res, next) {
-    return redirect("/register");
+    return res.redirect("/register");
   });
 
   // router.post("/register", function(req, res, next) {
@@ -296,7 +296,7 @@ if (!isDev && cluster.isMaster) {
   });
 
   router.get("/signin", function(req, res, next) {
-    return redirect("/");
+    return res.redirect("/");
   });
 
   router.get("/api/signout/", function(req, res, next) {
@@ -313,7 +313,7 @@ if (!isDev && cluster.isMaster) {
   });
 
   router.get("/signin", function(req, res, next) {
-    return redirect("/");
+    return res.redirect("/");
   });
 
   router.get("/api/user", function(req, res, next) {
