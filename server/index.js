@@ -174,11 +174,10 @@ if (!isDev && cluster.isMaster) {
       });
   });
 
-  // router.get("/rooms", isAuthenticated, function(req, res, next) {
-  //   // find the last room in the DB.
-  //   res.redirect("/");
-  //   return res.json();
-  // });
+  router.get("/rooms", function(req, res, next) {
+    // find the last room in the DB.
+    res.redirect("/");
+  });
 
   router.post("/api/joinRoom", function(req, res, next) {
     let id = req.body._id;
@@ -260,7 +259,7 @@ if (!isDev && cluster.isMaster) {
       res.setHeader(
         "Set-Cookie",
         cookie.serialize("username", username, {
-          path: "/rooms",
+          path: "/",
           maxAge: 60 * 60 * 24 * 7
         })
       );
