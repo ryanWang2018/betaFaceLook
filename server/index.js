@@ -148,7 +148,7 @@ if (!isDev && cluster.isMaster) {
     res.setHeader(
       "Set-Cookie",
       cookie.serialize("username", username, {
-        path: "/",
+        path: "/api",
         maxAge: 60 * 60 * 24 * 7 // 1 week in number of seconds
       })
     );
@@ -171,7 +171,7 @@ if (!isDev && cluster.isMaster) {
         res.setHeader(
           "Set-Cookie",
           cookie.serialize("username", username, {
-            path: "/",
+            path: "/api",
             maxAge: 60 * 60 * 24 * 7 // 1 week in number of seconds
           })
         );
@@ -265,7 +265,7 @@ if (!isDev && cluster.isMaster) {
       res.setHeader(
         "Set-Cookie",
         cookie.serialize("username", username, {
-          path: "/",
+          path: "/api",
           maxAge: 60 * 60 * 24 * 7
         })
       );
@@ -286,7 +286,7 @@ if (!isDev && cluster.isMaster) {
     res.setHeader(
       "Set-Cookie",
       cookie.serialize("username", "", {
-        path: "/",
+        path: "/api",
         maxAge: 60 * 60 * 24 * 7
       })
     );
