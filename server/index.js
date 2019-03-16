@@ -296,7 +296,7 @@ if (!isDev && cluster.isMaster) {
     return res.redirect("/");
   });
   router.get("/register", function(req, res, next) {
-    return res.redirect("/register");
+    return res.redirect("/");
   });
 
   router.get("/api/signout/", function(req, res, next) {
