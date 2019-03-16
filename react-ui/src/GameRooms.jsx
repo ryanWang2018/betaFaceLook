@@ -30,7 +30,7 @@ class GameRooms extends Component {
 
   handlerGetRooms = () => {
     api
-      .get("/api/rooms", null)
+      .get("/api/rooms")
       .then(res => {
         console.log(res.data);
         let rooms = res.data;
