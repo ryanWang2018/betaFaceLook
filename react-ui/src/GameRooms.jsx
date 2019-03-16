@@ -33,8 +33,6 @@ class GameRooms extends Component {
       .catch(err => {
         console.log(err);
       });
-    // // reset the rooms state.
-    // console.log("setting the state to new rooms");
   };
 
   handlerGetRooms() {
@@ -79,7 +77,6 @@ class GameRooms extends Component {
   };
   // called when the object state changes, and get data from server.
   componentDidMount(prevProps, prevState) {
-    console.log("haha");
     this.interval = setInterval(() => this.handlerGetRooms(), 3000);
   }
   // clean up data before something is removed from DOM.

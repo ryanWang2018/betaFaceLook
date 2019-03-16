@@ -197,6 +197,7 @@ if (!isDev && cluster.isMaster) {
   router.post("/api/Addroom", function(req, res, next) {
     let owner = req.body.owner;
     let current_users = req.body.current_users;
+    console.log("adding rooms");
     // find the last room in the DB.
     Rooms.insertMany({ owner: owner, current_users: current_users });
     Rooms.find({})

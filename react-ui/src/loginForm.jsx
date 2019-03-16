@@ -34,7 +34,7 @@ class LoginForm extends Component {
             error={this.state.error}
           />
           <div className="text-right">
-            <Link to="\register"> register</Link>
+            <Link to="/register"> register</Link>
           </div>
 
           <form onSubmit={this.login}>
@@ -81,7 +81,6 @@ class LoginForm extends Component {
         </div>
       );
     } else {
-      console.log("add GameRoom");
       return <Redirect to="/rooms" />;
     }
   }
