@@ -156,7 +156,7 @@ if (!isDev && cluster.isMaster) {
   });
 
   // adding longpolling
-  longpoll.create("/poll");
+  //longpoll.create("/poll");
 
   router.get("/api/rooms", function(req, res, next) {
     // find the last room in the DB.
@@ -168,7 +168,6 @@ if (!isDev && cluster.isMaster) {
         if (err) return res.status(500).end(err);
         return res.json(rooms);
       });
-    return;
   });
 
   router.get("/rooms", isAuthenticated, function(req, res, next) {
