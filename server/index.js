@@ -173,7 +173,6 @@ if (!isDev && cluster.isMaster) {
 
   router.get("/rooms", isAuthenticated, function(req, res, next) {
     // find the last room in the DB.
-
     res.redirect("/");
     return res.json();
   });
@@ -283,6 +282,11 @@ if (!isDev && cluster.isMaster) {
       })
     );
     return res.json("haha");
+  });
+
+  router.get("/", function(req, res, next) {
+    console.log("at root");
+    return res.json("at root");
   });
 
   router.get("/api/user", function(req, res, next) {
