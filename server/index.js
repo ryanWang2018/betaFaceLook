@@ -167,13 +167,7 @@ if (!isDev && cluster.isMaster) {
       .limit(6)
       .exec(function(err, rooms) {
         if (err) return res.status(500).end(err);
-        res.setHeader(
-          "Set-Cookie",
-          cookie.serialize("username", req.user._id, {
-            path: "/",
-            maxAge: 60 * 60 * 24 * 7
-          })
-        );
+
         console.log("at get api/rooms");
         return res.json(rooms);
       });
