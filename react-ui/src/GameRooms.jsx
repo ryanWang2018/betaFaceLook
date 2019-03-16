@@ -22,7 +22,7 @@ class GameRooms extends Component {
     //add the updated rooms into database
     api
       .post("/api/Addroom", {
-        current_users: 0
+        current_users: "0"
       })
       .then(res => {
         console.log(res.status);
