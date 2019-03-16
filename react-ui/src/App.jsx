@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import LoginPage from "LoginPage";
-import RegisterForm from "register";
-import GameRooms from "GameRooms.jsx";
+import LoginPage from "./LoginPage";
+import RegisterForm from "./register";
+import GameRooms from "./GameRooms.jsx";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import api from "./api";
 
@@ -38,7 +38,6 @@ class App extends Component {
           </Route>
 
           <Route path="/register" component={RegisterForm} />
-
           <Route path="/rooms">
             <GameRooms isLogin={this.state.isLogin} />
           </Route>

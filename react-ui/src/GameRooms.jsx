@@ -96,7 +96,7 @@ class GameRooms extends Component {
   };
 
   render() {
-    if (this.state.exit == true) {
+    if (this.state.exit === true) {
       return <Redirect to="/" />;
     } else {
       return (
