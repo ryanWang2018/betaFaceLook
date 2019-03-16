@@ -143,6 +143,7 @@ if (!isDev && cluster.isMaster) {
   console.log("set the cookie");
   app.use(function(req, res, next) {
     req.user = "user" in req.session ? req.session.user : null;
+    console.log(req.session.user);
     let username = req.user ? req.user._id : "";
     res.setHeader(
       "Set-Cookie",
@@ -166,15 +167,22 @@ if (!isDev && cluster.isMaster) {
       .limit(6)
       .exec(function(err, rooms) {
         if (err) return res.status(500).end(err);
+        res.setHeader(
+          "Set-Cookie",
+          cookie.serialize("username", req.user._id, {
+            path: "/",
+            maxAge: 60 * 60 * 24 * 7
+          })
+        );
         return res.json(rooms);
       });
   });
 
-  router.get("/rooms", isAuthenticated, function(req, res, next) {
-    // find the last room in the DB.
-    res.redirect("/");
-    return res.json();
-  });
+  // router.get("/rooms", isAuthenticated, function(req, res, next) {
+  //   // find the last room in the DB.
+  //   res.redirect("/");
+  //   return res.json();
+  // });
 
   router.post("/api/joinRoom", function(req, res, next) {
     let id = req.body._id;
