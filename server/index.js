@@ -152,7 +152,6 @@ if (!isDev && cluster.isMaster) {
         maxAge: 60 * 60 * 24 * 7 // 1 week in number of seconds
       })
     );
-    console.log(req.session.user._id);
     console.log("HTTP request", username, req.method, req.url, req.body);
     next();
   });
