@@ -40,6 +40,10 @@ if (!isDev && cluster.isMaster) {
   const app = express();
   const router = express.Router();
 
+  // adding longpoll
+  const longpoll = require("express-longpoll")(router);
+  var longpollWithDebug = require("express-longpoll")(app, { DEBUG: true });
+
   const User = require("./models/users");
   const Rooms = require("./models/rooms");
   app.use(express.static(path.resolve(__dirname, "../react-ui/build")));
@@ -151,6 +155,9 @@ if (!isDev && cluster.isMaster) {
     next();
   });
 
+  // adding longpolling
+  longpoll.create("/poll");
+
   router.get("/api/rooms", function(req, res, next) {
     // find the last room in the DB.
 
@@ -195,16 +202,21 @@ if (!isDev && cluster.isMaster) {
   });
 
   router.post("/api/Addroom", function(req, res, next) {
-    let owner = req.body.owner;
+    let owner = req.session.user._id;
     let current_users = req.body.current_users;
     console.log("adding rooms");
     // find the last room in the DB.
-    Rooms.insertMany({ owner: owner, current_users: current_users });
+    Rooms.insertMany({
+      owner: owner,
+      current_users: current_users,
+      users: [owner]
+    });
     Rooms.find({})
       .sort({ time: -1 })
       .limit(6)
       .exec(function(err, rooms) {
         if (err) return res.status(500).end(err);
+        longpoll.publish("/poll", json(rooms));
         return res.json(rooms);
       });
   });
@@ -226,47 +238,6 @@ if (!isDev && cluster.isMaster) {
         return res.json(rooms);
       });
   });
-
-  // router.post("/register", function(req, res, next) {
-  //   if (!("username" in req.body))
-  //     return res.status(400).end("username is missing");
-  //   if (!("password" in req.body))
-  //     return res.status(400).end("password is missing");
-  //   var username = req.body.username;
-  //   var password = req.body.password;
-  //   var email = req.body.email;
-  //   var first_name = req.body.first_name;
-  //   var last_name = req.body.last_name;
-  //   var salt = generateSalt();
-  //   var hash = generateHash(password, salt);
-
-  //   // insert new user into the database
-  //   User.findOne({ _id: username }, function(err, user) {
-  //     if (err) return res.status(500).end(err);
-  //     if (user)
-  //       return res
-  //         .status(401)
-  //         .end(username + " exists already, try another name");
-  //     User.insertMany(
-  //       [
-  //         {
-  //           _id: username,
-  //           hash: hash,
-  //           salt: salt,
-  //           email: email,
-  //           first_name: first_name,
-  //           last_name: last_name
-  //         }
-  //       ],
-  //       function(err, result) {
-  //         if (err) {
-  //           return res.status(500).end("insertion error");
-  //         }
-  //         return res.json(user);
-  //       }
-  //     );
-  //   });
-  // });
 
   router.post("/api/signin", function(req, res, next) {
     let username = req.body.username;

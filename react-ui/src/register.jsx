@@ -26,17 +26,6 @@ class RegisterForm extends Component {
     });
   }
 
-  componentDidMount(prevProps, prevState) {
-    api
-      .get("/api/register", null)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-
   render() {
     return (
       <div>

@@ -22,7 +22,6 @@ class GameRooms extends Component {
     //add the updated rooms into database
     api
       .post("/api/Addroom", {
-        owner: Cookies.get("username"),
         current_users: 0
       })
       .then(res => {
@@ -35,7 +34,7 @@ class GameRooms extends Component {
       });
   };
 
-  handlerGetRooms() {
+  handlerGetRooms = () => {
     api
       .get("/api/rooms", null)
       .then(res => {
@@ -46,7 +45,20 @@ class GameRooms extends Component {
       .catch(err => {
         console.log(err);
       });
-  }
+  };
+
+  handlerLongPolling = () => {
+    api
+      .get("/poll", null)
+      .then(res => {
+        console.log(res.data);
+        let rooms = res.data;
+        this.setState({ rooms });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   handlerDelete = room => {
     api
@@ -77,12 +89,11 @@ class GameRooms extends Component {
   };
   // called when the object state changes, and get data from server.
   componentDidMount(prevProps, prevState) {
-    this.interval = setInterval(() => this.handlerGetRooms(), 3000);
+    this.handlerGetRooms();
+    this.handlerLongPolling();
   }
   // clean up data before something is removed from DOM.
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
+  componentWillUnmount() {}
 
   handleSign_out = () => {
     //add the updated rooms into database

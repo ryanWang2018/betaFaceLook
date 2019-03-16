@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "https://hidden-cliffs-49484.herokuapp.com",
+  baseURL: "localhost:4000",
   timeout: 10000,
 
   withCredentials: true

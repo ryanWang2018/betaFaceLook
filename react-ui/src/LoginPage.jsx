@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import LoginForm from "./loginForm";
-import { Link, Route, Switch } from "react-router-dom";
-import RegisterForm from "./register.jsx";
 class LoginPage extends Component {
   constructor(props) {
     super(props);
