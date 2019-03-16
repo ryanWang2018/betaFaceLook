@@ -148,7 +148,7 @@ if (!isDev && cluster.isMaster) {
     res.setHeader(
       "Set-Cookie",
       cookie.serialize("username", username, {
-        path: "/api",
+        path: "/",
         maxAge: 60 * 60 * 24 * 7 // 1 week in number of seconds
       })
     );
@@ -167,14 +167,18 @@ if (!isDev && cluster.isMaster) {
       .limit(6)
       .exec(function(err, rooms) {
         if (err) return res.status(500).end(err);
+        console.log(req);
+        req.user = "user" in req.session ? req.session.user : null;
         let username = req.user ? req.user._id : "";
+        console.log(req.session.user);
         res.setHeader(
           "Set-Cookie",
           cookie.serialize("username", username, {
-            path: "/api",
+            path: "/",
             maxAge: 60 * 60 * 24 * 7 // 1 week in number of seconds
           })
         );
+
         console.log("at get api/rooms");
         return res.json(rooms);
       });
@@ -265,7 +269,7 @@ if (!isDev && cluster.isMaster) {
       res.setHeader(
         "Set-Cookie",
         cookie.serialize("username", username, {
-          path: "/api",
+          path: "/",
           maxAge: 60 * 60 * 24 * 7
         })
       );
@@ -286,7 +290,7 @@ if (!isDev && cluster.isMaster) {
     res.setHeader(
       "Set-Cookie",
       cookie.serialize("username", "", {
-        path: "/api",
+        path: "/",
         maxAge: 60 * 60 * 24 * 7
       })
     );
