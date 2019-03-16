@@ -140,10 +140,10 @@ if (!isDev && cluster.isMaster) {
     next();
   };
 
-  console.log("set the cookie");
   app.use(function(req, res, next) {
+    console.log("set the cookie");
     req.user = "user" in req.session ? req.session.user : null;
-    console.log(req.session.user);
+
     let username = req.user ? req.user._id : "";
     res.setHeader(
       "Set-Cookie",
@@ -152,6 +152,7 @@ if (!isDev && cluster.isMaster) {
         maxAge: 60 * 60 * 24 * 7 // 1 week in number of seconds
       })
     );
+    console.log(req.session.user._id);
     console.log("HTTP request", username, req.method, req.url, req.body);
     next();
   });
@@ -174,6 +175,8 @@ if (!isDev && cluster.isMaster) {
             maxAge: 60 * 60 * 24 * 7
           })
         );
+        console.log("at get api/rooms");
+        console.log(req.session.user._id);
         return res.json(rooms);
       });
   });
