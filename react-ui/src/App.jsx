@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import LoginPage from "./LoginPage";
-import RegisterForm from "./register";
-import GameRooms from "./GameRooms.jsx";
+import LoginPage from "LoginPage";
+import RegisterForm from "register";
+import GameRooms from "GameRooms.jsx";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import api from "./api";
 

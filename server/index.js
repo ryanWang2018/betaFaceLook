@@ -227,10 +227,6 @@ if (!isDev && cluster.isMaster) {
       });
   });
 
-  router.get("/register", function(req, res, next) {
-    return res.redirect("/register");
-  });
-
   // router.post("/register", function(req, res, next) {
   //   if (!("username" in req.body))
   //     return res.status(400).end("username is missing");
@@ -299,6 +295,9 @@ if (!isDev && cluster.isMaster) {
   router.get("/signin", function(req, res, next) {
     return res.redirect("/");
   });
+  router.get("/register", function(req, res, next) {
+    return res.redirect("/register");
+  });
 
   router.get("/api/signout/", function(req, res, next) {
     req.session.destroy();
@@ -311,10 +310,6 @@ if (!isDev && cluster.isMaster) {
       })
     );
     return res.json("haha");
-  });
-
-  router.get("/signin", function(req, res, next) {
-    return res.redirect("/");
   });
 
   router.get("/api/user", function(req, res, next) {
