@@ -260,7 +260,7 @@ if (!isDev && cluster.isMaster) {
       res.setHeader(
         "Set-Cookie",
         cookie.serialize("username", username, {
-          path: "/",
+          path: "/rooms",
           maxAge: 60 * 60 * 24 * 7
         })
       );
