@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import api from "./api.js";
+import ReactDOM from "react-dom";
 import ErrorMessage from "./errorMessage.jsx";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Redirect } from "react-router";
-import { Link } from "react-router-dom";
+
+const url = username => `/users/${username}`;
 class LoginForm extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       error: { content: "", shown: "" },
       username: "",
@@ -26,7 +30,7 @@ class LoginForm extends Component {
   }
 
   render() {
-    if (this.state.isAuth === false) {
+    if (!this.state.isAuth) {
       return (
         <div>
           <ErrorMessage
@@ -34,7 +38,7 @@ class LoginForm extends Component {
             error={this.state.error}
           />
           <div className="text-right">
-            <Link to="/register"> register</Link>
+            <a href="/register/">register</a>
           </div>
 
           <form onSubmit={this.login}>
@@ -81,7 +85,9 @@ class LoginForm extends Component {
         </div>
       );
     } else {
-      return <Redirect to="/rooms" />;
+
+      // let path = url(this.state.username);
+      return <Redirect to='/rooms/' />;
     }
   }
 
@@ -96,13 +102,14 @@ class LoginForm extends Component {
   login = event => {
     event.preventDefault();
     api
-      .post("/api/signin", {
+      .post("/signin/", {
         username: this.state.username,
         password: this.state.password
       })
       .then(res => {
-        if (res.status === 200) {
+        if (res.status >= 200 && res.status < 300) {
           this.setState({ isAuth: true });
+          // this.props.history.push("/");
         }
       })
       .catch(err => {

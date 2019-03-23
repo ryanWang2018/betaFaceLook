@@ -1,141 +1,139 @@
 import React, { Component } from "react";
-import Game_room from "./game_room.jsx";
+import GameRoom from './gameRoom.jsx';
 import api from "./api.js";
+import Cookies from "js-cookie";
+import LoginPage from "./loginForm.jsx";
+import ReactDOM from "react-dom";
 import { Redirect } from "react-router";
+
 class GameRooms extends Component {
   constructor(props) {
     super(props);
     this.state = {
       rooms: [],
       time: Date.now(),
-      exit: false
+      exit: false,
+      inRoom: ''
     };
   }
 
-  handleAdd_room = () => {
+
+  handleAddRoom = () => {
     //add the updated rooms into database
     api
-      .post("/api/Addroom", {
-        current_users: "0"
-      })
+      .post("/room/", null)
       .then(res => {
-        console.log(res.status);
+        //enter created room
+        console.log(res);
+        this.enterRoom(res.data._id);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    // // reset the rooms state.
+    // console.log("setting the state to new rooms");
+  };
+
+  handlerGetRooms() {
+    api
+      .get('rooms', null)
+      .then(res => {
         let rooms = res.data;
         this.setState({ rooms });
       })
       .catch(err => {
         console.log(err);
       });
-  };
+  }
 
-  handlerGetRooms = () => {
-    api
-      .get("/api/rooms")
-      .then(res => {
-        console.log(res.data);
-        let rooms = res.data;
-        this.setState({ rooms });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
-  handlerLongPolling = () => {
-    api
-      .get("/poll", null)
-      .then(res => {
-        console.log(res.data);
-        let rooms = res.data;
-        this.setState({ rooms });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
-  handlerDelete = room => {
-    api
-      .delete("/api/room/" + room._id + "/")
-      .then(res => {
-        let rooms = res.data;
-
-        this.setState(rooms => ({
-          rooms: rooms
-        }));
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
+  // handlerDelete = room => {
+  //   api
+  //     .delete("/room/" + room._id + "/")
+  //     .then(res => {
+  //       let rooms = res.data;
+  //       // this.setState({ rooms });
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // };
 
   handlerClick = roomId => {
     console.log("room is clicked", roomId);
   };
 
-  handlerIncrement = room => {
+  enterRoom = ownerId => {
     api
-      .post("/api/joinRoom/", room)
-      .then(res => {})
+      .post("/room/" + ownerId + "/enter/")
+      .then(res => {
+        console.log("enter room ", res.data);
+        this.setState({ inRoom: res.data._id });
+      })
       .catch(err => {
         console.log(err);
       });
   };
   // called when the object state changes, and get data from server.
-  componentDidMount(prevProps, prevState) {
-    this.handlerGetRooms();
-    //this.handlerLongPolling();
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.rooms !== prevState.rooms) {
+      this.handlerGetRooms();
+    }
+    this.interval = setInterval(() => this.handlerGetRooms(), 4000);
   }
   // clean up data before something is removed from DOM.
-  //componentWillUnmount() {}
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
 
-  handleSign_out = () => {
+  handleSignOut = () => {
     //add the updated rooms into database
     api
-      .get("/api/signout/")
-      .then(res => {})
+      .get("/signout/")
+      .then(res => {
+        console.log(res);
+        this.setState({ exit: true });
+      })
       .catch(err => {
         console.log(err);
       });
-    this.setState({ exit: true });
   };
 
   render() {
-    if (this.state.exit === true) {
-      return <Redirect to="/" />;
-    } else {
-      return (
-        <div>
-          <button
-            onClick={this.handleSign_out}
-            id="create_room_btn"
-            className="btn btn-danger btn-sm m-2"
-          >
-            sign out
+    if (this.state.exit) return <Redirect to='/' />;
+
+    if (this.state.inRoom) return <Redirect to={"/rooms/" + this.state.inRoom} />;
+    return (
+      <div>
+        <button
+          onClick={this.handleSignOut}
+          className="btn btn-danger btn-sm m-2"
+        >
+          sign out
           </button>
-          <div className="d-flex flex-wrap">
-            {this.state.rooms.map(room => (
-              <Game_room
-                key={room._id}
-                onRoomClick={this.handlerClick}
-                onRoomDelete={this.handlerDelete}
-                onIncrement={this.handlerIncrement}
-                room={room}
-              >
-                <h4>room ##{room.id}</h4>
-              </Game_room>
-            ))}
-          </div>
-          <button
-            onClick={this.handleAdd_room}
-            id="create_room_btn"
-            className="btn btn-danger btn-sm m-2"
-          >
-            create room
-          </button>
+        <div className="d-flex flex-wrap">
+          {this.state.rooms.map(room => (
+            <GameRoom
+              key={room.owner}
+              onRoomClick={this.handlerClick}
+              onRoomDelete={this.handlerDelete}
+              onEnter={this.enterRoom}
+              room={room}
+            >
+              <h4>room ##{room.owner}</h4>
+            </GameRoom>
+          ))}
         </div>
-      );
-    }
+        <button
+          onClick={this.handleAddRoom}
+          className="btn btn-danger btn-sm m-2"
+        >
+          create room
+          </button>
+      </div>
+    );
+
+
   }
 }
+
 export default GameRooms;

@@ -1,48 +1,53 @@
 import React, { Component } from "react";
-import LoginPage from "./LoginPage";
+import LoginPage from "./loginPage";
 import RegisterForm from "./register";
-import GameRooms from "./GameRooms.jsx";
-import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
+import GameRooms from "./gameRooms.jsx";
+import LoginForm from "./loginForm";
+import { BrowserRouter, Route, Switch, Link, Redirect } from "react-router-dom";
 import api from "./api";
+import GameBoard from './gameBoard.jsx';
+import PrepareRoom from "./prepareRoom";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLogin: false
-    };
-  }
-
-  componentDidMount() {
-    api
-      .get("/api/user", null)
+const checkAuth = (() => {
+  let res =
+    api.get('/user')
       .then(res => {
-        if (res.status === 200) {
-          console.log(res);
-          this.setState({ isLogin: true });
-        } else {
-          this.setState({ isLogin: false });
-        }
+        console.log(res);
+        return true;
       })
       .catch(err => {
         console.log(err);
-      });
+        return false;
+      })
+    ;
+  return res;
+
+})
+const AuthRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={props => (
+    checkAuth()) ? (<Component {...props} />
+    ) : (<Redirect to={{
+      pathname: '/'
+    }} />
+    )
+  } />
+)
+
+class App extends Component {
+
+  componentDidMount() {
+
   }
 
   render() {
     return (
-      <div>
-        <Switch>
-          <Route exact path="/">
-            <LoginPage isLogin={this.state.isLogin} />
-          </Route>
+      <Switch>
+        <Route exact path="/" component={LoginPage} />
 
-          <Route path="/register" component={RegisterForm} />
-          <Route path="/rooms">
-            <GameRooms isLogin={this.state.isLogin} />
-          </Route>
-        </Switch>
-      </div>
+        <Route exact path="/register/" component={RegisterForm} />
+        <AuthRoute exact path="/rooms/" component={GameRooms} />
+        <AuthRoute exact path="/rooms/:roomId/" component={PrepareRoom} />
+      </Switch>
     );
   }
 }
