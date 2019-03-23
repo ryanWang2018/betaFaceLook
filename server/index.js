@@ -51,7 +51,7 @@ if (!isDev && cluster.isMaster) {
   const User = require("./models/users");
   const Rooms = require("./models/rooms");
   app.use(express.static(path.resolve(__dirname, "../react-ui/build")));
-
+  //app.use(express.static(path.resolve(__dirname, "/")));
   // this is our MongoDB database
   const dbRoute =
     "mongodb+srv://jun:linjun9@facelook-jwbju.mongodb.net/facelook";
@@ -113,6 +113,12 @@ if (!isDev && cluster.isMaster) {
     hash.update(password);
     return hash.digest("base64");
   }
+
+  app.get("*", function(request, response) {
+    response.sendFile(
+      path.resolve(__dirname, "../react-ui/build", "index.html")
+    );
+  });
 
   app.use(
     session({
