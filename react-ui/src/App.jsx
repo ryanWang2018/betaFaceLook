@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import LoginPage from "./loginPage.jsx";
-import RegisterForm from "./register.jsx";
-import GameRooms from "./gameRooms.jsx";
+import LoginPage from "loginPage";
+import RegisterForm from "register";
+import GameRooms from "gameRooms";
 import { BrowserRouter, Route, Switch, Link, Redirect } from "react-router-dom";
 import api from "api.js";
-import PrepareRoom from "./prepareRoom.jsx";
+import PrepareRoom from "prepareRoom";
 
 const checkAuth = () => {
   let res = api
